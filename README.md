@@ -21,7 +21,7 @@ Find other macroeconomic & semiconductor market indicators and check their perfo
 
 ## Data Cleaning Steps:
 1. Remove everything with the "no Plan" tag in the column "planning_method_latest"
-2. We also remove all products that have had less than 10 months of demand records.
+2. We also remove all products that have had less than **18** months of demand records.
 
 ## Data Modeling :
 - Local models will be local to product names.
@@ -29,11 +29,11 @@ Find other macroeconomic & semiconductor market indicators and check their perfo
 
 ## Models used
 ### Baseline models to be compared against:
-1. ARIMA 
-    - ARIMA models can account for various patterns, such as linear or nonlinear trends, constant or varying volatility, and seasonal or non-seasonal fluctuations. ARIMA models are also easy to implement and interpret, as they only require a few parameters and assumptions. (https://www.linkedin.com/advice/3/what-advantages-disadvantages-arima-models-forecasting#:~:text=Advantages%20of%20ARIMA%20models&text=ARIMA%20models%20can%20account%20for,a%20few%20parameters%20and%20assumptions.)
+1. [ARIMA](https://www.linkedin.com/advice/3/what-advantages-disadvantages-arima-models-forecasting#:~:text=Advantages%20of%20ARIMA%20models&text=ARIMA%20models%20can%20account%20for,a%20few%20parameters%20and%20assumptions.)
+    - ARIMA models can account for various patterns, such as linear or nonlinear trends, constant or varying volatility, and seasonal or non-seasonal fluctuations. ARIMA models are also easy to implement and interpret, as they only require a few parameters and assumptions. 
     - ARIMA may not be suitable as we want to create a local model and tuning and extracting information from an ACF/PACF plot is not possible. We could implement a new function to do it, but due to the time constraints and papers showing many other models performing better than ARIMA, we did not think this was a good use of time.
-2. LSTM 
-    - LSTM can provide better results than parametric models and standard RNNs when dealing with complex autocorrelation sequences (long memory), large datasets, and the probability distribution of the underlying process is unknown or not replicable using standard parametric methods like ARIMA. (https://www.quora.com/Why-is-LSTM-good-for-time-series-prediction)
+2. [LSTM] (https://www.quora.com/Why-is-LSTM-good-for-time-series-prediction)
+    - LSTM can provide better results than parametric models and standard RNNs when dealing with complex autocorrelation sequences (long memory), large datasets, and the probability distribution of the underlying process is unknown or not replicable using standard parametric methods like ARIMA. 
 
 ### Other models we plan to explore:
 1. RNN
@@ -42,6 +42,7 @@ Find other macroeconomic & semiconductor market indicators and check their perfo
 4. Kats
 5. XGBoost
 6. DeepAR
+
 Time Series CV will be performed on all models and then be ranked by their SMAPE Score 
 
 ## Multi-Step Prediction:
@@ -49,8 +50,8 @@ We intend to use multiple step prediction to predict 18 months ahead [using the 
 - Recursive
 - Direct
 - DirRec
-- MIMO
-- DIRMO
+- MIMO (requires multivariate predictions)
+- DIRMO (requires multivariate predictions)
 
 ## Metric used
 **SMAPE** - To ensure that models are easily compared to Infineon's models
