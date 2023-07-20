@@ -3,7 +3,7 @@ Our attempt at forecasting demand 18 months in advance for infineon with a local
 
 ## Questions to tackle (from infineon readme, subpoint is how we plan to address the question):
 - From a methodological standpoint what time series forecasting options are available, what are advantages and disadvantages (forecasting new products – cold start, …)?
- - Different models e.g. ARIMA/LSTM....
+ - Different models e.g. ARIMA/LSTM/Random Forest
  - Different libraries statsmodels/Tensorflow/Darts/Sktime
  - Exogenous problems:
     - Cold Start - Find similar products with features similar to new product and predict based on that (maybe based on a certain match threshold etc.) 
@@ -35,31 +35,14 @@ Find other macroeconomic & semiconductor market indicators and check their perfo
 2. [LSTM](https://www.quora.com/Why-is-LSTM-good-for-time-series-prediction)
     - LSTM can provide better results than parametric models and standard RNNs when dealing with complex autocorrelation sequences (long memory), large datasets, and the probability distribution of the underlying process is unknown or not replicable using standard parametric methods like ARIMA. 
 
-### Other models we plan to explore:
-1. RNN
-2. Facebook Prophet
-3. VARIMA
-4. Kats
-5. XGBoost
-6. DeepAR
+3. Random Forest
+   - Random Forest (RF) is a versatile machine-learning algorithm commonly used for classification and regression tasks. It operates by combining multiple decision trees to make predictions. In a random forest, each decision tree is trained on a random subset of the training data and features, which helps prevent overfitting and improves generalization.
 
-Time Series CV will be performed on all models and then be ranked by their SMAPE Score 
-
-## Multi-Step Prediction:
-We intend to use multiple step prediction to predict 18 months ahead [using the following methods](https://arxiv.org/pdf/1108.3259.pdf)
-- Recursive
-- Direct
-- DirRec
-- MIMO (requires multivariate predictions)
-- DIRMO (requires multivariate predictions)
 
 ## Metric used
 **SMAPE** - To ensure that models are easily compared to Infineon's models
 
 ## Modeling Libraries Used:
 1. Sklearn
-2. Statsmodel
-3. Tensorflow
-4. prophet
-5. GluonTS
+3. Keras
 6. Darts
