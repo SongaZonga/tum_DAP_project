@@ -12,11 +12,6 @@ Our attempt at forecasting demand 18 months in advance for infineon with a local
 **Bonus question**
 Find other macroeconomic & semiconductor market indicators and check their performance regarding correlation significance & leading characteristic on product demand (e.g., stock market developments, GDP (gross domestic product), per capita GDP)?
 
-
-## Data Cleaning Steps:
-1. Remove everything with the "no Plan" tag in the column "planning_method_latest"
-2. We also remove all products that have had less than **18** months of demand records.
-
 ## Data Modeling :
 - Local models will be local to product names.
 - Columns such as "product_main_family", "product_marketing_name", and "product_basic_type" will be transformed into dummy variables/factors to be used in prediction. We intend to use these to create a match with cold start products.
