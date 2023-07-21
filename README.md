@@ -1,4 +1,4 @@
-# tum_DAP_project
+# tum_DAP_project Group 7
 Our attempt at forecasting demand 18 months in advance for infineon with a local model for each product.
 
 ## Questions to tackle (from infineon readme, subpoint is how we plan to address the question):
