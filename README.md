@@ -1,7 +1,7 @@
 # tum_DAP_project Group 7
 Our attempt at forecasting demand 18 months in advance for infineon with a local model for each product.
-Our final report, including pdf and Latex file please see DAA_G7.pdf and DAA G7.zip.
-Final Presentation slides please check Data Analytics in Applications Group 7.pptx
+Our final report, including pdf and Latex file please see **DAA_G7.pdf** and **DAA G7.zip**.
+Final Presentation slides please check **Data Analytics in Applications Group 7.pptx**.
 
 ## Questions to tackle (from infineon readme, subpoint is how we plan to address the question):
 - From a methodological standpoint what time series forecasting options are available, what are advantages and disadvantages (forecasting new products – cold start, …)?
@@ -23,6 +23,7 @@ Find other macroeconomic & semiconductor market indicators and check their perfo
   - eda.ipynb
   - full_df.csv (modified version of orginal dataset, with stock prices, and only with products with more than or equal to 50 datapoints)
   - yfinance_data.ipynb
+  - stockprice.csv
 
 ## Models used
 ### Baseline models to be compared against:
