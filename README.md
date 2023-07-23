@@ -23,6 +23,7 @@ Find other macroeconomic & semiconductor market indicators and check their perfo
   - eda.ipynb
   - full_df.csv (modified version of orginal dataset, with stock prices, and only with products with more than or equal to 50 datapoints)
   - yfinance_data.ipynb
+  - stockprice.csv
 
 ## Models used
 ### Baseline models to be compared against:
