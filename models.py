@@ -6,7 +6,7 @@ from keras.callbacks import EarlyStopping
 from keras.callbacks import ModelCheckpoint
 import itertools
 from keras import backend as K
-from model_preparation import smape_loss, datasplit
+from model_preparation import smape_loss, datasplit, datasplit_3618
 # SEED = 666
 # os.environ['PYTHONHASHSEED']=str(SEED)
 # np.random.seed(SEED)
@@ -153,8 +153,20 @@ def LSTM_HyperParameter_Tuning(config, x_train, y_train, x_test, y_test, sc, acc
             hist.append(list((n_neurons, n_batch_size, dropout, 'not working')))
     return best_accracy, best_smape, best_regressor, best_predicted_demand, hist
 
-#Calculate the error indicator
-def calculate_smape_RF(df_forcalculate, step):
+# function to create future demand for 18 months validation
+def predictfuture_3618(dataset, step, model, period):
+    dataset = dataset[0:len(dataset)-18]
+    for _ in range(period):
+        datasetX = dataset[-step:]
+        X_train = datasetX.reshape(1, step, datasetX.shape[1])
+        if isinstance(model, list):
+            pass
+        next_prediction = model.predict(X_train)
+        dataset = np.vstack([dataset, next_prediction])
+    return dataset[-period:]
+
+#Calculate the error indicator for 18 months validation
+def calculate_smape_3618(df_forcalculate, step):
     # calculate the correlation between each feature and demand and choose the first 8 features
     corr_matrix = df_forcalculate.corr()
     demand_corr = corr_matrix.sort_values(by=['demand'], ascending=False)
@@ -166,7 +178,7 @@ def calculate_smape_RF(df_forcalculate, step):
     df_sc = scaler.fit_transform(df.reset_index(drop=True))
     dataset = np.array(df_sc)
 
-    X_train, X_test, y_train, y_test = datasplit(dataset, step)
+    X_train, X_test, y_train, y_test, future_y = datasplit_3618(dataset, step)
     model = seq2seqModel(X_train, step)
     es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=5)
     model.fit(X_train, y_train, epochs=50, verbose=0, validation_split=0.2, batch_size=64, callbacks=[es])
@@ -175,4 +187,4 @@ def calculate_smape_RF(df_forcalculate, step):
     y_true = scaler.inverse_transform(y_test)
     smape = smape_loss(y_true[:, 0], predicted_demand[:, 0])
 
-    return dataset, model, X_train, X_test, y_train, y_test, predicted_demand, smape, scaler, real_demand
+    return dataset, model, X_train, X_test, y_train, y_test, predicted_demand, smape, scaler, real_demand, future_y
